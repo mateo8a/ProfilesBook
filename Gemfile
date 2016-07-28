@@ -49,3 +49,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #devise - used to implement user creation features
 gem 'devise'
+
+#To format forms and make them pretty
+gem 'simple_form'
