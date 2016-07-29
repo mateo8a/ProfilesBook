@@ -2,7 +2,9 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$ ->
+status_options = ->
     $('.status').hover (event) ->
         console.log("Hover triggered")
         $(this).toggleClass("hover")
+
+$(document).on('turbolinks:load', status_options)

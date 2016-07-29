@@ -14,4 +14,25 @@
  *= require_self
  */
 
-body { padding-top: 0px; }
+/*body*/
+body { 
+	padding-top: 0px; 
+}
+
+/*top menu navbar*/
+.navbar .navbar-nav {
+	display: inline-block;
+}
+
+/*media*/
+@media (max-width: 767px) {
+	body {
+		padding-top: 50px;
+	}
+}
+
+@media (max-width: 327px) {
+	body {
+		padding-top: 100px;
+	}
+}
