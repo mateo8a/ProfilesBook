@@ -8,7 +8,7 @@ class CustomRoutesTest < ActionDispatch::IntegrationTest
   end
 
   test "the route /logout actually opens the logout page" do
-  	get '/logout'
+  	post '/logout'
   	assert_response :redirect	
   	assert_redirected_to '/'
   end

@@ -12,13 +12,13 @@ class StatusesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should redirect to login page if not logged in" do
+  test "should be logged in to get new" do
     get new_status_url
     assert_response :redirect
     assert_redirected_to login_path
   end
 
-  test "should be able to create new status if logged in" do
+  test "should be able to get new if logged in" do
     sign_in users(:RandomUser)
     get new_status_url
     assert_response :success
@@ -30,7 +30,7 @@ class StatusesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to login_path
   end
 
-  test "should create status when logged in" do
+  test "should create status if logged in" do
     sign_in users(:RandomUser)
     assert_difference('Status.count') do
       post statuses_url, params: { status: { content: @status.content, user_id: @status.user.id } }
@@ -44,17 +44,40 @@ class StatusesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get edit" do
+  test "Should be logged in to get edit" do
+    get edit_status_url(@status)
+    assert_response :redirect
+    assert_redirected_to login_path
+  end
+
+  test "should be able to get edit when logged in" do
+    sign_in users(:RandomUser)
     get edit_status_url(@status)
     assert_response :success
   end
 
-  test "should update status" do
+  test "should be logged in to update status" do
+    patch status_url(@status), params: { status: { content: @status.content } }
+    assert_response :redirect
+    assert_redirected_to login_path
+  end
+
+  test "should be able to update status if logged in" do
+    sign_in users(:RandomUser)
     patch status_url(@status), params: { status: { content: @status.content } }
     assert_redirected_to status_url(@status)
   end
 
-  test "should destroy status" do
+  test "should be logged in to destroy status" do
+    assert_difference('Status.count', 0) do
+      delete status_url(@status)
+    end
+
+    assert_redirected_to login_path
+  end
+
+  test "should be able to destroy status if logged in" do
+    sign_in users(:RandomUser)
     assert_difference('Status.count', -1) do
       delete status_url(@status)
     end
