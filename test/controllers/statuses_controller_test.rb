@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class StatusesControllerTest < ActionDispatch::IntegrationTest
+  include Devise::Test::IntegrationHelpers
+
   setup do
     @status = statuses(:one)
   end
@@ -10,14 +12,28 @@ class StatusesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get new" do
+  test "should redirect to login page if not logged in" do
+    get new_status_url
+    assert_response :redirect
+    assert_redirected_to login_path
+  end
+
+  test "should be able to create new status if logged in" do
+    sign_in users(:RandomUser)
     get new_status_url
     assert_response :success
   end
 
-  test "should create status" do
+  test "should be logged in to post status" do
+    post statuses_url, params: { status: { content: "Tessst content", user_id: 1 } }
+    assert_response :redirect
+    assert_redirected_to login_path
+  end
+
+  test "should create status when logged in" do
+    sign_in users(:RandomUser)
     assert_difference('Status.count') do
-      post statuses_url, params: { status: { content: @status.content, name: @status.name } }
+      post statuses_url, params: { status: { content: @status.content, user_id: @status.user.id } }
     end
 
     assert_redirected_to status_url(Status.last)
@@ -34,7 +50,7 @@ class StatusesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update status" do
-    patch status_url(@status), params: { status: { content: @status.content, name: @status.name } }
+    patch status_url(@status), params: { status: { content: @status.content } }
     assert_redirected_to status_url(@status)
   end
 

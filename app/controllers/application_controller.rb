@@ -10,4 +10,14 @@ class ApplicationController < ActionController::Base
   	devise_parameter_sanitizer.permit(:sign_up, keys: added_attrs)
   end
 
+  def authenticate_user!
+    if user_signed_in?
+      super
+    else
+      redirect_to login_path, :alert => 'You need to log in before you add a new status!'
+      ## if you want render 404 page
+      ## render :file => File.join(Rails.root, 'public/404'), :formats => [:html], :status => 404, :layout => false
+    end
+  end
+
 end
