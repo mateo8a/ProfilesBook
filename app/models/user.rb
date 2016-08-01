@@ -11,8 +11,8 @@ class User < ApplicationRecord
   validates :profile_name, presence: true, 
                            uniqueness: true, 
                            format: {
-                           	with: /A-Za-z0-9_-./,
-                           	message: 'Format your profile name correctly or else you cannot use the best app ever!'
+                           	with: /\A[a-zA-Z0-9-_]+\z/,
+                           	message: 'has to be formatted correctly or else you cannot use the best app ever!'
                            }
 
   has_many :statuses
