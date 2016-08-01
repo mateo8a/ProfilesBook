@@ -18,4 +18,9 @@ class CustomRoutesTest < ActionDispatch::IntegrationTest
   	assert_response :success  	
   end
 
+  test "/profile_name actually opens a user's profile page" do
+    get '/ruser'
+    assert_response :success
+  end
+
 end
