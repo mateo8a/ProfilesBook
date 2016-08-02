@@ -26,21 +26,9 @@ class UserTest < ActiveSupport::TestCase
   test "user should have a unique profile name" do
   	user = User.new
   	user.profile_name = users(:RandomUser).profile_name
-
   	assert !user.save
   	assert !user.errors[:profile_name].empty?
   end
-
-# test "user should have a unique profile name" do
-#    user1 = User.new
-#    user2 = User.new
-#    user1.profile_name = users(:RandomUser).profile_name
-#    user2.profile_name = users(:RandomUser2).profile_name
-
-#    assert !user1.save
-#    assert !user2.save
-#    assert_not_equal user1.profile_name, user2.profile_name
-#  end
 
   test "user should have a profile name without spaces" do
   	user = User.new(first_name: 'Random', last_name: 'User', email: 'randomUser101@gmail.com')
