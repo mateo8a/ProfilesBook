@@ -54,7 +54,7 @@ class StatusesController < ApplicationController
       end
     else 
       respond_to do |format|
-        format.html { redirect_to edit_status_path, alert: 'You can only edit your own statuses.' }
+        format.html { redirect_to :back, alert: 'You can only edit your own statuses.' }
         format.json { render json: @status.errors, status: :unprocessable_entity }
       end
     end
@@ -63,10 +63,17 @@ class StatusesController < ApplicationController
   # DELETE /statuses/1
   # DELETE /statuses/1.json
   def destroy
-    @status.destroy
-    respond_to do |format|
-      format.html { redirect_to statuses_url, notice: 'Status was successfully destroyed.' }
-      format.json { head :no_content }
+    if @status.user_id == current_user.id
+      @status.destroy
+      respond_to do |format|
+        format.html { redirect_to statuses_url, notice: 'Status was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to :back, alert: 'You can only delete your own statuses.' }
+        format.json { render json: @status.errors, status: :unprocessable_entity }
+      end
     end
   end
 

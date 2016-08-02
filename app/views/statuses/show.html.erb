@@ -11,4 +11,5 @@
 </p>
 
 <%= link_to 'Edit', edit_status_path(@status) %> |
-<%= link_to 'Back', statuses_path %>
+<%= link_to 'Frontpage', statuses_path %> |
+<%= link_to 'Profile', user_profile_path(current_user.profile_name) %>
