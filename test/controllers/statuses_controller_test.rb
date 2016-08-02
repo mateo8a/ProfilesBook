@@ -25,15 +25,15 @@ class StatusesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should be logged in to post status" do
-    post statuses_url, params: { status: { content: "Tessst content", user_id: 1 } }
+    post statuses_url, params: { status: { content: "Tessst content" } }
     assert_response :redirect
     assert_redirected_to login_path
   end
 
-  test "should create status if logged in" do
+  test "should be able to create status if logged in" do
     sign_in users(:RandomUser)
     assert_difference('Status.count') do
-      post statuses_url, params: { status: { content: @status.content, user_id: @status.user.id } }
+      post statuses_url, params: { status: { content: @status.content } }
     end
 
     assert_redirected_to status_url(Status.last)
@@ -44,7 +44,7 @@ class StatusesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "Should be logged in to get edit" do
+  test "should be logged in to get edit" do
     get edit_status_url(@status)
     assert_response :redirect
     assert_redirected_to login_path

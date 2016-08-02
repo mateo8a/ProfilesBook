@@ -10,8 +10,8 @@
       </ul>
     </div>
   <% end %>
-  
-  <%= f.input :user_id, collection: User.all, label_method: :full_name %>
+
+<h3><%= current_user.full_name %>, aka <%= current_user.profile_name %>, wants to share something. How exciting!</h3>
   <%= f.input :content %>
 
   <div class="form-actions">

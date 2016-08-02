@@ -1,6 +1,20 @@
 RandomUser:
-  first_name : 'Rrandom'
+  first_name: 'Rrandom'
   last_name: 'Uuser'
   email: 'random.user99@gmail.com'
+  profile_name: 'ruser'
+  encrypted_password: 'password'
+
+Jesus:
+  first_name: 'Jesus'
+  last_name: 'God'
+  email: 'IamJesus@gmail.com'
+  profile_name: 'jesus1'
+  encrypted_password: 'password'
+
+RandomUser2: #has same profile_name as RandomUser
+  first_name: 'Rrandom2'
+  last_name: 'Uuser2'
+  email: 'random.user999@gmail.com'
   profile_name: 'ruser'
   encrypted_password: 'password'

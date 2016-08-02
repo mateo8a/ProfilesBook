@@ -16,7 +16,7 @@ class ProfilesControllerTest < ActionDispatch::IntegrationTest
   test "should assign correct variables on a user's profile page" do
   	get profiles_show_url, params: { id: users(:RandomUser).profile_name }
   	assert assigns(:user)
-  	assert_not_empty assigns(:statuses)
+  	assert assigns(:statuses)
   end
 
   test "should only show a user's statuses, not all statuses" do
