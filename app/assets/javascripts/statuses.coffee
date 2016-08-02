@@ -3,8 +3,11 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 status_options = ->
-    $('.status').hover (event) ->
+    $('.status').mouseover (event) ->
         console.log("Hover triggered")
-        $(this).toggleClass("hover")
+        $(this).addClass("hover")
+    $('.status').mouseout (event) ->
+        console.log("Hover triggered")
+        $(this).removeClass("hover")
 
 $(document).on('turbolinks:load', status_options)
