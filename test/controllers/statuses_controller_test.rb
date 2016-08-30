@@ -62,9 +62,19 @@ class StatusesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to login_path
   end
 
-  test "should be able to update status if logged in" do
+  test "should not be able to update others' statuses" do
     sign_in users(:RandomUser)
+    @status.user = users(:Jesus)
     patch status_url(@status), params: { status: { content: @status.content } }
+    assert_response :redirect
+    assert_redirected_to status_url(@status)
+  end
+
+  test "should be able to only update own statuses" do
+    sign_in users(:RandomUser)
+    @status.user = users(:RandomUser)
+    patch status_url(@status), params: { status: { content: @status.content } }
+    assert_response :redirect
     assert_redirected_to status_url(@status)
   end
 
@@ -74,6 +84,15 @@ class StatusesControllerTest < ActionDispatch::IntegrationTest
     end
 
     assert_redirected_to login_path
+  end
+
+  test "should not be able to destroy others' statuses" do
+    sign_in users(:RandomUser)
+    @status.user = users(:Jesus)
+    assert_difference('Status.count', 0) do
+      delete status_url(@status)
+    end
+    assert_redirected_to statuses_url
   end
 
   test "should be able to destroy status if logged in" do

@@ -10,6 +10,9 @@
   <%= @status.content %>
 </p>
 
-<%= link_to 'Edit', edit_status_path(@status) %> |
-<%= link_to 'Frontpage', statuses_path %> |
-<%= link_to 'My Profile', user_profile_path(current_user.profile_name) %>
+<% if @status.user == current_user %>
+  <%= link_to 'Edit', edit_status_path(@status) %> |
+<% end %>
+
+<%= link_to 'Frontpage', statuses_path %> | 
+<%= link_to @status.user.full_name + "\'s Profile", user_profile_path(@status.user.profile_name) %>

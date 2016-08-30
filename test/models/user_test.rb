@@ -27,7 +27,6 @@ class UserTest < ActiveSupport::TestCase
   	user = User.new
   	user.profile_name = users(:RandomUser).profile_name
   	assert !user.save
-  	assert !user.errors[:profile_name].empty?
   end
 
   test "user should have a profile name without spaces" do

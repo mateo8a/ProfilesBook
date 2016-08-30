@@ -55,5 +55,5 @@ gem 'devise'
 #To format forms and make them pretty
 gem 'simple_form'
 
-#Use assert_template in test environment
+#Makes tester able to use assert_template in test environment
 gem 'rails-controller-testing'
