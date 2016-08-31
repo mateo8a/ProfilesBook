@@ -15,7 +15,7 @@ class User < ApplicationRecord
                            	message: 'has to be formatted correctly or else you cannot use the best app ever!'
                            }
 
-  has_many :statuses
+  has_many :statuses, dependent: :destroy
 
   def full_name
   	first_name + " " + last_name
